@@ -3,6 +3,7 @@ import Banner from '../../component/banner/Banner';
 import Staticcard from '../../component/staticCard/Staticcard';
 import { useLoaderData } from 'react-router';
 import Dynamiccard from '../../component/dynamicCard/Dynamiccard';
+import Brands from '../../component/brands/Brands';
 
 const Homepage = () => {
     const data=useLoaderData();
@@ -23,7 +24,7 @@ const Homepage = () => {
             </div>
            </div>
           
-          
+          <Brands></Brands>
         </div>
     );
 };
