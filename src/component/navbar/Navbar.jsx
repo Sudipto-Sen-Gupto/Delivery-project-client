@@ -38,7 +38,7 @@ const Navbar = () => {
   </div>
   <div className="navbar-end">
    <button className='btn'>Log IN</button>
-   <button className='btn btn-primary'>Register</button>
+   <button className='btn btn-primary text-black'>Register</button>
    <LuCircleArrowOutUpRight />
   </div>
 </div>
