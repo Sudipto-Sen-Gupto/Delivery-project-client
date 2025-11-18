@@ -5,12 +5,12 @@ import { Outlet } from 'react-router';
 
 const Rootlayout = () => {
     return (
-        <div className='max-w-7xl mx-auto'>
+        <div className='max-w-7xl mx-auto bg-gray-100'>
             <header> 
                   <Navbar></Navbar>
                   </header>
 
-            <main>
+            <main className='mt-4'>
                  <Suspense fallback={<p>data is loading</p>}> 
                       <Outlet></Outlet>
                  </Suspense>
