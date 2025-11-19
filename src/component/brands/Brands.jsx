@@ -12,6 +12,8 @@ import { Autoplay, Pagination } from 'swiper/modules';
 const Brands = () => {
     const logo=[amazon,casio,moonstar,randstad,star,starPeople];
     return (
+        <>
+        <h1 className='text-3xl font-bold text-center my-5'>We helped thousands of sales teams.</h1>
         <Swiper slidesPerView={4}
         centeredSlides={true}
         spaceBetween={30}
@@ -36,7 +38,7 @@ const Brands = () => {
         <SwiperSlide><img src={star} alt="" /></SwiperSlide>
         <SwiperSlide><img src={starPeople} alt="" /></SwiperSlide> */}
         
-        </Swiper>
+        </Swiper></>
     );
 };
 

@@ -4,6 +4,9 @@ import Staticcard from '../../component/staticCard/Staticcard';
 import { useLoaderData } from 'react-router';
 import Dynamiccard from '../../component/dynamicCard/Dynamiccard';
 import Brands from '../../component/brands/Brands';
+import Servicedata from '../../component/servicedata/Servicedata';
+import Prority from '../../component/prority/Prority';
+import Reviews from '../../component/reviews/Reviews';
 
 const Homepage = () => {
     const data=useLoaderData();
@@ -25,6 +28,9 @@ const Homepage = () => {
            </div>
           
           <Brands></Brands>
+          <Servicedata></Servicedata>
+          <Prority></Prority>
+          <Reviews></Reviews>
         </div>
     );
 };
