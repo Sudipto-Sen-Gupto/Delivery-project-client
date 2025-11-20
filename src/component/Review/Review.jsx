@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Review = ({singleData}) => {
-    console.log(singleData);
-    
+    // console.log(singleData);
+    const {userName,user_photoURL,user_email}=singleData
     
     return (
         <div>
@@ -22,11 +22,11 @@ const Review = ({singleData}) => {
 
       {/* Profile */}
       <div className="flex items-center gap-4 mt-4">
-      <img src={singleData.user_photoURL}className='rounded-full h-[60px] w-[60px]' alt="" />
+      <img src={user_photoURL}className='rounded-full h-[60px] w-[60px]' alt="" />
 
         <div>
-          <h3 className="font-semibold text-lg text-teal-900">{singleData.userName}</h3>
-          <p className="text-gray-500 text-sm">{singleData.user_email}</p>
+          <h3 className="font-semibold text-lg text-teal-900">{userName}</h3>
+          <p className="text-gray-500 text-sm">{user_email}</p>
         </div>
       </div>
     </div>

@@ -39,7 +39,7 @@ const Reviews = () => {
         }}
         coverflowEffect={{
           rotate: 45,
-          stretch: 0,
+          stretch: '40%',
           depth: 150,
           modifier: 1.2,
           slideShadows: true,
