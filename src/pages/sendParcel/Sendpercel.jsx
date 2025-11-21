@@ -1,6 +1,7 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useLoaderData } from 'react-router';
+import Swal from 'sweetalert2';
 
 const Sendpercel = () => {
      
@@ -10,10 +11,11 @@ const Sendpercel = () => {
     const duplicateRegion=districtDetail.map(dR=>dR.region);
     // console.log(duplicateRegion);
     const region=[...new Set(duplicateRegion)];
-    console.log(region);
-    const{register,handleSubmit,watch,formState:{errors}}=useForm();
+    // console.log(region);
+    const{register,handleSubmit,control,formState:{errors}}=useForm();
      
-    const senderRegion=watch('senderRegion')
+    const senderRegion=useWatch({control,name:'senderRegion'});
+    const receiverRegion=useWatch({control,name:'receiverRegion'})
     const districtRegion=(selectedRegion)=>{
         const regionFilter=districtDetail.filter(db=>db.region===selectedRegion);
         const district=regionFilter.map(regFi=>regFi.district);
@@ -22,6 +24,42 @@ const Sendpercel = () => {
 
     const handleParcel=(data)=>{
          console.log(data);
+         const isFiltype=data.filetype==='document'
+         const isDistance=data.senderDistrict===data.receiverDistrict;
+        //  console.log(isDistance,isFiltype);
+          const parcelMass=parseFloat(data.parcelWeight)  
+         let cost=0;
+         const extraWeight=parseFloat(parcelMass-3);
+         if(isFiltype){
+            cost=isDistance? 60:80
+         }
+       else{
+        if(parcelMass<=3){
+            cost=isDistance? 110:150
+        }
+        else{
+            cost=isDistance? 110+(extraWeight*40) : 150+(extraWeight*40)+40
+        }
+       }
+       console.log(cost);
+
+       Swal.fire({
+  title: "Are you sure to purchase the product?",
+  text: `You must have to pay ${cost} for delivery charge for this product`,
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, pay now"
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success"
+    });
+  }
+});
     }
     return (
         <div className='my-8 text-secondary bg-white px-12 py-6 '>
@@ -142,12 +180,26 @@ const Sendpercel = () => {
         </fieldset>
 
          <fieldset className="fieldset">
-           <legend className="fieldset-legend  text-[20px] font-bold">Receiver District</legend>
+           <legend className="fieldset-legend  text-[20px] font-bold">Receiver Region</legend>
+  <select defaultValue="Pick a browser" {...register('receiverRegion')} className="select w-full">
+    <option disabled={true}>Select your region</option>
+
+    {
+        region.map((reg,index)=> <option key={index}>{reg}</option>)
+    }
+   
+   
+  </select>
+          
+        </fieldset>
+
+         <fieldset className="fieldset">
+           <legend className="fieldset-legend  text-[20px] font-bold">Receiver district</legend>
   <select defaultValue="Pick a browser" {...register('receiverDistrict')} className="select w-full">
     <option disabled={true}>Select your city</option>
 
     {
-        region.map((reg,index)=> <option key={index}>{reg}</option>)
+       districtRegion(receiverRegion).map((reg,index)=> <option key={index}>{reg}</option>)
     }
    
    
