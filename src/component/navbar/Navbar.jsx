@@ -1,9 +1,18 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import './nav.css'
 import { LuCircleArrowOutUpRight } from 'react-icons/lu';
+import Usehook from '../../firebase/hook/Usehook';
+import { toast } from 'react-toastify';
 const Navbar = () => {
+        
+       const {user,logOut}=Usehook();
+       const handleLogOut=()=>{
+              logOut().then(data=>{
+                toast("Log out successful")
+              }).catch(err=>toast(err.message))
+       }
 
     const list=<nav className='flex flex-col gap-5 md:flex-row '>
         <NavLink to={'/'}>Home</NavLink>
@@ -37,9 +46,11 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-   <button className='btn'>Log IN</button>
-   <button className='btn btn-primary text-black'>Register</button>
-   <LuCircleArrowOutUpRight />
+  {
+    user?  <button className='btn' onClick={handleLogOut}>Log out</button>: <Link to={'/login'}> <button className='btn' >Log IN</button></Link>
+  }
+   <Link to={'/rider'}><button className='btn btn-primary text-black'>Be a ride</button>
+   </Link><LuCircleArrowOutUpRight />
   </div>
 </div>
         </div>

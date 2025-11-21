@@ -7,6 +7,8 @@ import Coverage from '../../pages/coverage/Coverage';
 import Authlayout from '../../layout/authlayout/Authlayout';
 import Login from '../../Auth/login/Login';
 import Register from '../../Auth/register/Register';
+import Privateroute from '../privateroute/Privateroute';
+import Rider from '../../pages/rider/Rider';
 
 export const router = createBrowserRouter([{
         
@@ -23,6 +25,10 @@ export const router = createBrowserRouter([{
         path:'/coverage',
         loader:()=>axios.get('/warehouses.json'),
         Component:Coverage
+    },
+    {
+      path:'/rider',
+      element:<Privateroute> <Rider></Rider>      </Privateroute>
     }
 ]
 },
