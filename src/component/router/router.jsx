@@ -9,6 +9,7 @@ import Login from '../../Auth/login/Login';
 import Register from '../../Auth/register/Register';
 import Privateroute from '../privateroute/Privateroute';
 import Rider from '../../pages/rider/Rider';
+import Sendpercel from '../../pages/sendParcel/Sendpercel';
 
 export const router = createBrowserRouter([{
         
@@ -29,6 +30,11 @@ export const router = createBrowserRouter([{
     {
       path:'/rider',
       element:<Privateroute> <Rider></Rider>      </Privateroute>
+    },
+    {
+      path:'/sendparcel',
+      loader:()=>axios.get('/warehouses.json'),
+      element:<Privateroute> <Sendpercel></Sendpercel></Privateroute>
     }
 ]
 },
