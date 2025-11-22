@@ -20,7 +20,7 @@ const Navbar = () => {
         <NavLink to={'/coverage'}>Coverage</NavLink>
         <NavLink to={'/sendparcel'}>Send a parcel</NavLink>
         <NavLink to={'/blog'}>Blog</NavLink>
-        <NavLink to={'/contact'}>Contact</NavLink>
+        <NavLink to={'/adminlayout/myparcels'}>Myparcels</NavLink>
     </nav>
     return (
         <div>

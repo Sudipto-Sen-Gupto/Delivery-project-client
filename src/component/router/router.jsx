@@ -10,6 +10,9 @@ import Register from '../../Auth/register/Register';
 import Privateroute from '../privateroute/Privateroute';
 import Rider from '../../pages/rider/Rider';
 import Sendpercel from '../../pages/sendParcel/Sendpercel';
+import Adminlayout from '../../layout/adminLayout/Adminlayout';
+import Homeadmin from '../../layout/adminLayout/Homeadmin';
+import Myparcels from '../../layout/adminLayout/Myparcels';
 
 export const router = createBrowserRouter([{
         
@@ -47,9 +50,24 @@ export const router = createBrowserRouter([{
                   },
                   {
                     path:'/register',
-                    Component:Register
+                    Component:Register,
+                    
                   }
                 ]
+          },
+
+          {
+            path:'/adminlayout',
+            element:<Privateroute> <Adminlayout></Adminlayout> </Privateroute>
+            ,
+            children:[{
+              index:true,
+              Component:Homeadmin
+            },
+          {
+            path:'myparcels',
+            Component:Myparcels
+          }]
           }
    
 ])

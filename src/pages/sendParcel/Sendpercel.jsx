@@ -2,10 +2,14 @@ import React from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useLoaderData } from 'react-router';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../firebase/hook/useAxiosSecure';
+import { toast } from 'react-toastify';
+import Usehook from '../../firebase/hook/Usehook';
 
 const Sendpercel = () => {
      
     const data=useLoaderData();
+    const {user}=Usehook();
     // console.log(data.data);
     const districtDetail=data.data;
     const duplicateRegion=districtDetail.map(dR=>dR.region);
@@ -14,6 +18,8 @@ const Sendpercel = () => {
     // console.log(region);
     const{register,handleSubmit,control,formState:{errors}}=useForm();
      
+    const axiosSecure=useAxiosSecure();
+
     const senderRegion=useWatch({control,name:'senderRegion'});
     const receiverRegion=useWatch({control,name:'receiverRegion'})
     const districtRegion=(selectedRegion)=>{
@@ -53,11 +59,16 @@ const Sendpercel = () => {
   confirmButtonText: "Yes, pay now"
 }).then((result) => {
   if (result.isConfirmed) {
-    Swal.fire({
-      title: "Deleted!",
-      text: "Your file has been deleted.",
-      icon: "success"
-    });
+
+    axiosSecure.post('/parcels',data).then(res=>{
+      toast("Add to cart")
+      console.log(res.data);
+    })
+    // Swal.fire({
+    //   title: "Deleted!",
+    //   text: "Your file has been deleted.",
+    //   icon: "success"
+    // });
   }
 });
     }
@@ -100,9 +111,17 @@ const Sendpercel = () => {
                 <div>
                          
                            <h1 className='text-2xl font-bold'>Sender Details</h1>
+
+                   <fieldset className="fieldset">
+          <label className="label text-[20px] font-bold">Sender Email</label>
+          <input type="email" {...register('senderEmail')}  defaultValue={user.email} className="input  w-full" placeholder="Write your email" />
+          
+        </fieldset>
+                  
+
                             <fieldset className="fieldset">
           <label className="label text-[20px] font-bold">Sender Name</label>
-          <input type="text" {...register('senderName')} className="input  w-full" placeholder="Write your name" />
+          <input type="text" {...register('senderName')} className="input  w-full" placeholder="Write your name" defaultValue={user.displayName}/>
           
         </fieldset>
 
@@ -161,6 +180,13 @@ const Sendpercel = () => {
                 {/* receiver info */}
                 <div>
                     <h1 className='text-3xl font-bold'>Receiver Information</h1>
+
+       <fieldset className="fieldset">
+          <label className="label text-[20px] font-bold">Receiver Email</label>
+          <input type="text" {...register('receiverEmail')} className="input  w-full" placeholder="Write your email" />
+          
+        </fieldset>
+
                       <fieldset className="fieldset">
           <label className="label text-[20px] font-bold">Receiver Name</label>
           <input type="text" {...register('receiverName')} className="input  w-full" placeholder="Write your name" />
