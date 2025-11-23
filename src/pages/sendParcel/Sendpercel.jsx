@@ -48,6 +48,8 @@ const Sendpercel = () => {
         }
        }
        console.log(cost);
+           
+        data.cost=cost;
 
        Swal.fire({
   title: "Are you sure to purchase the product?",
@@ -73,7 +75,7 @@ const Sendpercel = () => {
 });
     }
     return (
-        <div className='my-8 text-secondary bg-white px-12 py-6 '>
+        <div className='my-8 text-secondary bg-white px-12 '>
 
             {/* text */}
             
