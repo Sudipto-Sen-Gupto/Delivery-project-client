@@ -66,6 +66,20 @@ swalWithBootstrapButtons.fire({
   }
 });
     }
+
+    const handlePay=async(parcel)=>{
+      const parcelInfo={
+              cost: parcel.cost,
+              parcelId: parcel._id,
+              parcelName: parcel.parcelName,
+              senderEmail: parcel.senderEmail
+      }
+      console.log(parcelInfo);
+         const paymentMethod= await axiosSecure.post('/create-checkout-direct-session',parcelInfo);
+         console.log(paymentMethod.data);
+         window.location.href=paymentMethod.data.url;
+
+    }
     return (
         <div >
            <h1> My parcels ={parcels.length}</h1>
@@ -96,8 +110,11 @@ swalWithBootstrapButtons.fire({
         <td>{parcel.parcelName}</td>
         <td>{parcel.cost}</td>
         <td>{
-            parcel.paymentStatus==='paid'?<span className='bg-green-600 text-black'>Already paid</span>
-            : <Link to={`/adminLayout/payment/${parcel._id}`} className='btn btn-primary text-black'>Pay now</Link>}</td>
+            parcel.paymentStatus==='paid'?<span className=' text-green-600'>Already paid</span>
+            : 
+            // <Link to={`/adminLayout/payment/${parcel._id}`} className='btn btn-primary text-black'>Pay now</Link>
+           <button className='btn btn-primary text-black' onClick={()=>handlePay(parcel)}>Pay now</button>
+            }</td>
 
         <td>{parcel.deliveryStatus}</td>
         <td>
