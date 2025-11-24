@@ -4,6 +4,7 @@ import useAxiosSecure from '../../firebase/hook/useAxiosSecure';
 import Usehook from '../../firebase/hook/Usehook';
 import { Fullscreen, SquarePen, Trash } from 'lucide-react';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router';
 
 const Myparcels = () => {
     const axiosSecure=useAxiosSecure();
@@ -75,9 +76,11 @@ swalWithBootstrapButtons.fire({
     <thead>
       <tr>
         <th></th>
-        <th>Name</th>
+        <th>Sender Name</th>
+        <th>Parcel Name</th>
         <th>Cost</th>
         <th>Payment Status</th>
+        <th>Delivery Status</th>
         <th >
              Action
         </th>
@@ -90,8 +93,13 @@ swalWithBootstrapButtons.fire({
         parcels.map((parcel,index)=> <tr key={parcel._id}>
         <th>{index+1}</th>
         <td>{parcel.senderName}</td>
+        <td>{parcel.parcelName}</td>
         <td>{parcel.cost}</td>
-        <td>Blue</td>
+        <td>{
+            parcel.paymentStatus==='paid'?<span className='bg-green-600 text-black'>Already paid</span>
+            : <Link to={`/adminLayout/payment/${parcel._id}`} className='btn btn-primary text-black'>Pay now</Link>}</td>
+
+        <td>{parcel.deliveryStatus}</td>
         <td>
             <button className='btn hover:bg-primary'>  <SquarePen /></button>
             <button className='btn my-2 md:mx-3 hover:bg-primary'>    <Fullscreen /> </button>

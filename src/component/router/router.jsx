@@ -13,6 +13,9 @@ import Sendpercel from '../../pages/sendParcel/Sendpercel';
 import Adminlayout from '../../layout/adminLayout/Adminlayout';
 import Homeadmin from '../../layout/adminLayout/Homeadmin';
 import Myparcels from '../../layout/adminLayout/Myparcels';
+import Payment from '../../layout/adminLayout/Payment';
+import SuccesPayment from '../../layout/adminLayout/SuccesPayment';
+import CancelPayment from '../../layout/adminLayout/CancelPayment';
 
 export const router = createBrowserRouter([{
         
@@ -67,7 +70,20 @@ export const router = createBrowserRouter([{
           {
             path:'myparcels',
             Component:Myparcels
-          }]
+          },
+                {
+                  path:'payment/:parcelId',
+                  Component:Payment
+                } 
+                 ,{
+                         path:'payment-success',
+                         Component:SuccesPayment
+                }  ,
+                {
+                  path:'payment-cancelled',
+                  Component:CancelPayment
+                }   
+         ]
           }
    
 ])
