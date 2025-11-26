@@ -2,16 +2,28 @@ import React from 'react';
 import Usehook from '../../firebase/hook/Usehook';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
+import useAxiosSecure from '../../firebase/hook/useAxiosSecure';
 
 const Googlelog = () => {
       const location=useLocation();
       const navigate=useNavigate();
     const {googleSign}=Usehook();
-
+     const axiosSecure=useAxiosSecure();
     const handleClick=()=>{
         googleSign().then(data=>{
-            toast("Log in with goole successfully");
+
+            console.log(data.user);
+               const userInfo={
+                  email:data.user.email,
+                  displayName: data.user.displayName,
+                  photoURL: data.user.photoURL
+               }
+            axiosSecure.post('/userdetail',userInfo).then(()=>{
+                     
+                toast("Log in with google successfully");
             navigate(location?.state || '/')
+            })
+            
         }).catch(err=>toast(err.message));
     }
     return (

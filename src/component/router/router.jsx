@@ -17,6 +17,7 @@ import Payment from '../../layout/adminLayout/Payment';
 import SuccesPayment from '../../layout/adminLayout/SuccesPayment';
 import CancelPayment from '../../layout/adminLayout/CancelPayment';
 import PaymentHistory from '../../layout/adminLayout/PaymentHistory';
+import Approveriders from '../../layout/adminLayout/Approveriders';
 
 export const router = createBrowserRouter([{
         
@@ -36,7 +37,8 @@ export const router = createBrowserRouter([{
     },
     {
       path:'/rider',
-      element:<Privateroute> <Rider></Rider>      </Privateroute>
+       loader:()=>axios.get('/warehouses.json'),
+      element:<Privateroute> <Rider></Rider> </Privateroute>
     },
     {
       path:'/sendparcel',
@@ -87,7 +89,12 @@ export const router = createBrowserRouter([{
                 {
                   path:'paymenthistory',
                   Component:PaymentHistory
-                }  
+                },
+                {
+                  path:'approveriders',
+                  Component:Approveriders
+                }
+
          ]
           }
    

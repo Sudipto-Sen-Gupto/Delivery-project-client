@@ -22,6 +22,7 @@ const Sendpercel = () => {
 
     const senderRegion=useWatch({control,name:'senderRegion'});
     const receiverRegion=useWatch({control,name:'receiverRegion'})
+    
     const districtRegion=(selectedRegion)=>{
         const regionFilter=districtDetail.filter(db=>db.region===selectedRegion);
         const district=regionFilter.map(regFi=>regFi.district);

@@ -1,4 +1,4 @@
-import { ShoppingBasket } from 'lucide-react';
+import { FolderClock, Motorbike, ShoppingBasket } from 'lucide-react';
 import React, { Suspense } from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
 
@@ -45,8 +45,14 @@ const Adminlayout = () => {
                 
              </li>
              <li>
-                <NavLink to={'/adminlayout/paymenthistory'} className={'is-drawer-close:tooltip is-drawer-close:tooltip-right'} data-tip='Payment History'  >   <ShoppingBasket />
+                <NavLink to={'/adminlayout/paymenthistory'} className={'is-drawer-close:tooltip is-drawer-close:tooltip-right'} data-tip='Payment History'  >     <FolderClock />
                  <span className="is-drawer-close:hidden">Payment History</span>
+                </NavLink>
+                
+             </li>
+             <li>
+                <NavLink to={'/adminlayout/approveriders'} className={'is-drawer-close:tooltip is-drawer-close:tooltip-right'} data-tip='approve Rider'  >     <Motorbike />
+                 <span className="is-drawer-close:hidden">Approve Riders</span>
                 </NavLink>
                 
              </li>
