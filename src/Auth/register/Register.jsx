@@ -5,11 +5,13 @@ import { toast } from 'react-toastify';
 import Googlelog from '../googlelog/Googlelog';
 import { Link, useLocation, useNavigate } from 'react-router';
 import axios from 'axios';
+import useAxiosSecure from '../../firebase/hook/useAxiosSecure';
 
 const Register = () => {
  
     const location=useLocation();
-    const navigate=useNavigate()      
+    const navigate=useNavigate() ;
+    const axiosSecure=useAxiosSecure();     
       const {signUp,updateUserProfile}=Usehook();
     const {register,handleSubmit,formState:{ errors }}=useForm();
 
@@ -26,6 +28,17 @@ const Register = () => {
 
           axios.post(image_url_api,formData).then(res=>
           {
+                 
+             const userInfo={
+                  email:data.email,
+                  displayName:data.name,
+                   photoURL:res.data.data.url
+             }
+
+            axiosSecure.post('/userdetail',userInfo).then(()=>{
+              console.log('post in database successfully');
+            })
+
             console.log(res.data.data.url);
             const detail={
               displayName:data.name,

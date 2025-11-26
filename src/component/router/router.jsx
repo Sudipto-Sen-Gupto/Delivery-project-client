@@ -16,6 +16,7 @@ import Myparcels from '../../layout/adminLayout/Myparcels';
 import Payment from '../../layout/adminLayout/Payment';
 import SuccesPayment from '../../layout/adminLayout/SuccesPayment';
 import CancelPayment from '../../layout/adminLayout/CancelPayment';
+import PaymentHistory from '../../layout/adminLayout/PaymentHistory';
 
 export const router = createBrowserRouter([{
         
@@ -82,7 +83,11 @@ export const router = createBrowserRouter([{
                 {
                   path:'payment-cancelled',
                   Component:CancelPayment
-                }   
+                } ,
+                {
+                  path:'paymenthistory',
+                  Component:PaymentHistory
+                }  
          ]
           }
    

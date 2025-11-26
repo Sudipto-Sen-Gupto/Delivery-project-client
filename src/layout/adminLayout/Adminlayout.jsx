@@ -39,8 +39,14 @@ const Adminlayout = () => {
              {/* my parcels */}
 
              <li>
-                <NavLink to={'adminlayout/myparcels'} className={'is-drawer-close:tooltip is-drawer-close:tooltip-right'} data-tip='Myparcels'  >   <ShoppingBasket />
+                <NavLink to={'/adminlayout/myparcels'} className={'is-drawer-close:tooltip is-drawer-close:tooltip-right'} data-tip='Myparcels'  >   <ShoppingBasket />
                  <span className="is-drawer-close:hidden">Myparcels</span>
+                </NavLink>
+                
+             </li>
+             <li>
+                <NavLink to={'/adminlayout/paymenthistory'} className={'is-drawer-close:tooltip is-drawer-close:tooltip-right'} data-tip='Payment History'  >   <ShoppingBasket />
+                 <span className="is-drawer-close:hidden">Payment History</span>
                 </NavLink>
                 
              </li>

@@ -1,13 +1,13 @@
 import React from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../firebase/hook/useAxiosSecure';
 import { toast } from 'react-toastify';
 import Usehook from '../../firebase/hook/Usehook';
 
 const Sendpercel = () => {
-     
+      const navigate=useNavigate();     
     const data=useLoaderData();
     const {user}=Usehook();
     // console.log(data.data);
@@ -66,11 +66,12 @@ const Sendpercel = () => {
       toast("Add to cart")
       console.log(res.data);
     })
-    // Swal.fire({
-    //   title: "Deleted!",
-    //   text: "Your file has been deleted.",
-    //   icon: "success"
-    // });
+    navigate('/adminlayout/myparcels')
+    Swal.fire({
+      title: "Thank you",
+      text: "You are in payment page",
+      icon: "success"
+    });
   }
 });
     }
