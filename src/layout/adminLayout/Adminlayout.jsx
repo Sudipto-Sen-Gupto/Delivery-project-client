@@ -1,8 +1,11 @@
-import { FolderClock, Motorbike, ShoppingBasket } from 'lucide-react';
+import { BookA, Contact, FolderClock, Motorbike, ShoppingBasket } from 'lucide-react';
 import React, { Suspense } from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
-
+import './admin.css'
+import useRole from '../../firebase/hook/useRole';
 const Adminlayout = () => {
+
+     const {personRole}=useRole();
     return (
         <div className='max-w-7xl mx-auto'>
             <div className="drawer lg:drawer-open">
@@ -50,12 +53,35 @@ const Adminlayout = () => {
                 </NavLink>
                 
              </li>
-             <li>
+                  
+                  {/* Admin side */}
+                    { personRole==='admin' &&
+
+                       <>
+                                <li>
                 <NavLink to={'/adminlayout/approveriders'} className={'is-drawer-close:tooltip is-drawer-close:tooltip-right'} data-tip='approve Rider'  >     <Motorbike />
                  <span className="is-drawer-close:hidden">Approve Riders</span>
                 </NavLink>
                 
              </li>
+                                <li>
+                <NavLink to={'/adminlayout/assignriders'} className={'is-drawer-close:tooltip is-drawer-close:tooltip-right'} data-tip='Assign Rider'  >      <BookA />
+                 <span className="is-drawer-close:hidden">Assign  Riders</span>
+                </NavLink>
+                
+             </li>
+
+
+             <li>
+                <NavLink to={'/adminlayout/usermanager'} className={'is-drawer-close:tooltip is-drawer-close:tooltip-right'} data-tip='user manager'  >      <Contact />
+                 <span className="is-drawer-close:hidden">User Manager</span>
+                </NavLink>
+                
+             </li>
+                       </>
+                       
+                    }
+
         {/* List item */}
         <li>
           <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">

@@ -1,12 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useRef } from 'react';
 import useAxiosSecure from '../../firebase/hook/useAxiosSecure';
-import { Trash2, UserMinus, UserRoundCheck } from 'lucide-react';
+import { Eye, Trash2, UserMinus, UserRoundCheck } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 const Approveriders = () => {
           
     const axiosSecure=useAxiosSecure();
+   
+    const modal=useRef();
+
     const {refetch,data:riders=[]}=useQuery({
         queryKey:['riders','pending'],
         queryFn: async()=>{
@@ -21,6 +24,7 @@ const Approveriders = () => {
                          console.log(rider._id);
 
         const updateInfo={status:status,email:rider.email}
+
         axiosSecure.patch(`/riders/${rider._id}`,updateInfo).then(res=>{
                
             refetch()
@@ -43,10 +47,14 @@ const Approveriders = () => {
 
      const handleReject=(rider)=>{
         updateRider(rider,'Decline')
+     } 
+
+     const handleView=()=>{
+                modal.current.showModal();
      }
 
     return (
-        <div className='text-5xl font-bold'>
+        <div className='text-5xl font-bold p-10'>
            <h1>Approval request : {riders.length}</h1>
 
            <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
@@ -58,7 +66,8 @@ const Approveriders = () => {
         <th>Name</th>
         <th>Email</th>
         <th>District</th>
-        <th>Status</th>
+        <th>Application Status</th>
+        <th>Work Status</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -81,7 +90,14 @@ const Approveriders = () => {
               }
             </p>
             </td>
+
+            <td>
+              {
+                rider.workStatus
+              }
+            </td>
         <td>
+            <button className='btn' onClick={handleView}>  <Eye /></button>
             <button onClick={()=>handleAccept(rider)} className='btn'> <UserRoundCheck /></button>
             <button className='btn' onClick={()=>handleReject(rider)}> <UserMinus /></button>
             <button className='btn'>  <Trash2 /></button>
@@ -95,6 +111,23 @@ const Approveriders = () => {
     </tbody>
   </table>
 </div>
+                   {/* Open the modal using document.getElementById('ID').showModal() method */}
+{/* <button className="btn" onClick={()=>document.getElementById('my_modal_5').showModal()}>open modal</button> */}
+<dialog id="my_modal_5" ref={modal} className="modal modal-bottom sm:modal-middle">
+  <div className="modal-box">
+    <h3 className="font-bold text-lg">Hello!</h3>
+    <p className="py-4">Press ESC key or click the button below to close</p>
+    <div className="modal-action">
+      <form method="dialog">
+        {/* if there is a button in form, it will close the modal */}
+        <button className="btn">Close</button>
+      </form>
+    </div>
+  </div>
+
+    
+</dialog>
+
         </div>
     );
 };

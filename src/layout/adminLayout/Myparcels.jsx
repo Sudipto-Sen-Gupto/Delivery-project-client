@@ -93,6 +93,7 @@ swalWithBootstrapButtons.fire({
         <th>Sender Name</th>
         <th>Parcel Name</th>
         <th>Cost</th>
+        <th>Tracking Id</th>
         <th>Payment Status</th>
         <th>Delivery Status</th>
         <th >
@@ -109,6 +110,7 @@ swalWithBootstrapButtons.fire({
         <td>{parcel.senderName}</td>
         <td>{parcel.parcelName}</td>
         <td>{parcel.cost}</td>
+        <td>{parcel.trackingId}</td>
         <td>{
             parcel.paymentStatus==='paid'?<span className=' text-green-600'>Already paid</span>
             : 

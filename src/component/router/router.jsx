@@ -18,6 +18,9 @@ import SuccesPayment from '../../layout/adminLayout/SuccesPayment';
 import CancelPayment from '../../layout/adminLayout/CancelPayment';
 import PaymentHistory from '../../layout/adminLayout/PaymentHistory';
 import Approveriders from '../../layout/adminLayout/Approveriders';
+import UserManager from '../../layout/adminLayout/UserManager';
+import Adminroute from '../privateroute/Adminroute';
+import Assignriders from '../../layout/adminLayout/Assignriders';
 
 export const router = createBrowserRouter([{
         
@@ -92,7 +95,21 @@ export const router = createBrowserRouter([{
                 },
                 {
                   path:'approveriders',
-                  Component:Approveriders
+                  element:  <Adminroute><Approveriders></Approveriders></Adminroute>
+                 
+                },
+                
+                {
+                  path:'assignriders',
+                  element:<Adminroute> <Assignriders></Assignriders> </Adminroute>
+                },
+                {
+                  path:'usermanager',
+                 
+                  element:<Adminroute>
+                    <UserManager></UserManager>
+                  </Adminroute>
+                
                 }
 
          ]
