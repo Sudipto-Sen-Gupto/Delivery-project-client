@@ -43,20 +43,22 @@ const Assignriders = () => {
                 Rider_name:rider.name,
                 Rider_email:rider.email,
                 Rider_id:rider._id,
-                Parcel_id:selectedParcel._id
+                Parcel_id:selectedParcel._id,
+                trackingId:selectedParcel.trackingId
             }
                  
             console.log(updateRiderInfo);
             axiosSecure.patch(`/parcels/${selectedParcel._id}`,updateRiderInfo).then(res=>{
-                if(res.data.modifiedCount){
+               if(res.data.result?.modifiedCount){
                      
                     
                      riderAssignModal.current.close();
                           parcelsRefetch();
                     Swal.fire({
-                      title: "Drag me!",
+                      title: "Rider is assigned",
                        icon: "success",
-                           draggable: true
+                           draggable: true,
+                           timer: 1500
 });
                 }
             })

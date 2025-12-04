@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import useAxiosSecure from '../../firebase/hook/useAxiosSecure';
 import { toast } from 'react-toastify';
-import { ShieldOff, ShieldUser } from 'lucide-react';
+import { Motorbike, ShieldOff, ShieldUser, User } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 const UserManager = () => {
@@ -14,7 +14,9 @@ const UserManager = () => {
         queryKey:['userDetail',search],
         queryFn:async()=>{
             const res= await  axiosSecure.get(`/userdetail?searchtext=${search}`)
+            console.log(res.data);
             return res.data;
+            
         }
     })
 
@@ -48,6 +50,38 @@ const UserManager = () => {
             }
         })
     }
+
+
+     const handleMakeRider=(userRole)=>{
+        const roleInfo= {role:'rider'};
+        axiosSecure.patch(`/userdetail/${userRole._id}/role`,roleInfo ).then(res=>{
+            console.log(res.data);
+            refetch()
+            if(res.data.modifiedCount){
+                Swal.fire({
+  title: `${userRole.displayName} is admin`,
+  icon: "success",
+  draggable: true
+});
+            }
+        })
+    }
+     
+   const handleCancelRider=(userRole)=>{
+        const roleInfo= {role:'user'};
+        axiosSecure.patch(`/userdetail/${userRole._id}/role`,roleInfo ).then(res=>{
+            console.log(res.data);
+            refetch()
+            if(res.data.modifiedCount){
+                Swal.fire({
+  title: `${userRole.displayName} is refused for admin`,
+  icon: "success",
+  draggable: true
+});
+            }
+        })
+    }
+
     return (
         <div className='p-5'>
            <h1 className='text-3xl font-bold'> User information count ={userInfo.length}</h1>
@@ -83,7 +117,7 @@ const UserManager = () => {
         <th>Email</th>
         <th>Create At</th>
         <th>Admin actions</th>
-        <th>Other actions</th>
+        <th>Rider actions</th>
       </tr>
     </thead>
     <tbody>
@@ -115,12 +149,21 @@ const UserManager = () => {
           <span className="badge badge-ghost badge-sm">{info.role}</span>
         </td>
         <td>{info.createdAt}</td>
-        <th>
+        <td>
           {
             info.role==='admin'? <button className='btn' onClick={()=>handleCancelUser(info)} > <ShieldOff /></button>:
             <button onClick={()=>handleMakeAdmin(info)}> <ShieldUser /> </button>
           }
-        </th>
+
+       
+        </td>
+
+        <td>
+       {
+          info.role==='rider'? <button onClick={()=>handleCancelRider(info)}>  <User /></button> : <button className=''onClick={()=>handleMakeRider(info)}> <Motorbike /></button>
+          
+        }
+        </td>
       </tr>
             
         })

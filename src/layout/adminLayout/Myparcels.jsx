@@ -72,7 +72,8 @@ swalWithBootstrapButtons.fire({
               cost: parcel.cost,
               parcelId: parcel._id,
               parcelName: parcel.parcelName,
-              senderEmail: parcel.senderEmail
+              senderEmail: parcel.senderEmail,
+              trackingId:parcel.trackingId
       }
       console.log(parcelInfo);
          const paymentMethod= await axiosSecure.post('/create-checkout-direct-session',parcelInfo);
@@ -110,7 +111,9 @@ swalWithBootstrapButtons.fire({
         <td>{parcel.senderName}</td>
         <td>{parcel.parcelName}</td>
         <td>{parcel.cost}</td>
-        <td>{parcel.trackingId}</td>
+        <td>
+          <Link to={`/parcel-track/${parcel.trackingId}`}>{parcel.trackingId}</Link>
+        </td>
         <td>{
             parcel.paymentStatus==='paid'?<span className=' text-green-600'>Already paid</span>
             : 

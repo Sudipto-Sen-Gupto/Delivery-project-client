@@ -21,6 +21,11 @@ import Approveriders from '../../layout/adminLayout/Approveriders';
 import UserManager from '../../layout/adminLayout/UserManager';
 import Adminroute from '../privateroute/Adminroute';
 import Assignriders from '../../layout/adminLayout/Assignriders';
+import DeliveryTask from '../../layout/adminLayout/DeliveryTask';
+import Riderroute from '../privateroute/Riderroute';
+import Completedtask from '../../layout/adminLayout/Completedtask';
+import Trackingparcel from '../../pages/trackingParcel/Trackingparcel';
+import Admindashboard from '../../layout/adminLayout/Admindashboard';
 
 export const router = createBrowserRouter([{
         
@@ -47,6 +52,10 @@ export const router = createBrowserRouter([{
       path:'/sendparcel',
       loader:()=>axios.get('/warehouses.json'),
       element:<Privateroute> <Sendpercel></Sendpercel></Privateroute>
+    },
+    {
+      path: '/parcel-track/:trackingId',
+      Component: Trackingparcel
     }
 ]
 },
@@ -69,10 +78,11 @@ export const router = createBrowserRouter([{
             path:'/adminlayout',
             element:<Privateroute> <Adminlayout></Adminlayout> </Privateroute>
             ,
-            children:[{
-              index:true,
-              Component:Homeadmin
-            },
+            children:[
+              {
+                    index:true,
+                    Component:Admindashboard
+              },
           {
             path:'myparcels',
             Component:Myparcels
@@ -93,6 +103,8 @@ export const router = createBrowserRouter([{
                   path:'paymenthistory',
                   Component:PaymentHistory
                 },
+
+                // admin route
                 {
                   path:'approveriders',
                   element:  <Adminroute><Approveriders></Approveriders></Adminroute>
@@ -110,7 +122,17 @@ export const router = createBrowserRouter([{
                     <UserManager></UserManager>
                   </Adminroute>
                 
-                }
+                },
+
+                //rider private route
+              {
+                path:'deliverytask',
+                element: <Riderroute><DeliveryTask></DeliveryTask></Riderroute>
+              },
+              {
+                path:'completedtask',
+                element: <Riderroute><Completedtask></Completedtask> </Riderroute>
+              }
 
          ]
           }
