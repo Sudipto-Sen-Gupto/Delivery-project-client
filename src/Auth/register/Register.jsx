@@ -46,7 +46,7 @@ const Register = () => {
             }
 
             updateUserProfile(detail).then(res=>{
-              toast("update successfully")
+              // toast("update successfully")
               navigate(location.state || '/')
             }).catch(err=>toast(err.message))
           }
