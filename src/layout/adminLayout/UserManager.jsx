@@ -59,7 +59,7 @@ const UserManager = () => {
             refetch()
             if(res.data.modifiedCount){
                 Swal.fire({
-  title: `${userRole.displayName} is admin`,
+  title: `${userRole.displayName} is Rider`,
   icon: "success",
   draggable: true
 });
@@ -74,7 +74,7 @@ const UserManager = () => {
             refetch()
             if(res.data.modifiedCount){
                 Swal.fire({
-  title: `${userRole.displayName} is refused for admin`,
+  title: `${userRole.displayName} is refused for Rider`,
   icon: "success",
   draggable: true
 });
