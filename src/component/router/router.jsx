@@ -26,6 +26,7 @@ import Riderroute from '../privateroute/Riderroute';
 import Completedtask from '../../layout/adminLayout/Completedtask';
 import Trackingparcel from '../../pages/trackingParcel/Trackingparcel';
 import Admindashboard from '../../layout/adminLayout/Admindashboard';
+import Service from '../../pages/services/Service';
 
 export const router = createBrowserRouter([{
         
@@ -38,6 +39,11 @@ export const router = createBrowserRouter([{
         loader:()=>axios.get('/data.json'),
         Component:Homepage
     },
+    {
+                path:'/services',
+                Component:Service
+              }
+              ,
     {
         path:'/coverage',
         loader:()=>axios.get('/warehouses.json'),
@@ -83,6 +89,7 @@ export const router = createBrowserRouter([{
                     index:true,
                     Component:Admindashboard
               },
+              
           {
             path:'myparcels',
             Component:Myparcels
